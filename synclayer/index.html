@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sync Layer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #1e4d26;
+            color: #fff;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px 50px;
+            align-items: center;
+        }
+        .header a {
+            text-decoration: none;
+            color: #fff;
+            margin-left: 20px;
+            font-size: 16px;
+        }
+        .header .contact-btn {
+            background-color: #b3ff66;
+            padding: 15px 30px;
+            border-radius: 30px;
+            text-transform: uppercase;
+            font-weight: bold;
+            font-size: 18px;
+            color: #000;
+            text-decoration: none;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+        }
+        .header .contact-btn:hover {
+            background-color: #99e55b;
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+        }
+        .main-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 50px;
+        }
+        .main-content .text-section {
+            flex: 1;
+            max-width: 50%;
+        }
+        .main-content .text-section h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+        .main-content .text-section p {
+            font-size: 18px;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+        .main-content .text-section .get-started-btn {
+            background-color: #b3ff66;
+            color: #000;
+            padding: 15px 30px;
+            font-size: 18px;
+            text-transform: uppercase;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+        }
+        .main-content .text-section .get-started-btn:hover {
+            background-color: #99e55b;
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+        }
+        .main-content .image-section {
+            flex: -1;
+            max-width: 60%;
+            display: flex;
+            justify-content: center;
+        }
+        .main-content .image-section img {
+            max-width: 100%;
+            height: auto;
+        }
+        .features-section {
+            padding: 50px;
+            background-color: #fff;
+            color: #1e4d26;
+        }
+        .features-section h2 {
+            font-size: 36px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .features-section .subtitle {
+            font-size: 24px;
+            text-align: center;
+            margin-bottom: 30px;
+            color: #000;
+        }
+        .features-section .subtitle span {
+            color: #1e4d26;
+            font-weight: bold;
+        }
+        .features-container {
+            display: flex;
+            justify-content: space-around;
+            gap: 20px;
+        }
+        .feature-box {
+            background-color: #e8ffe6;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            flex: 1;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .feature-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+        .feature-box img {
+            max-width: 150px;
+            margin-bottom: 25px;
+        }
+        .feature-box h3 {
+            font-size: 22px;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+        .feature-box p {
+            font-size: 18px;
+            line-height: 1.6;
+        }
+        .solutions-section {
+            padding: 50px;
+            background-color: #d4f880;
+            color: #1e4d26;
+            text-align: center;
+        }
+        .solutions-section h2 {
+            font-size: 36px;
+            margin-bottom: 30px;
+            font-weight: bold;
+        }
+        .solutions-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+        .solution-box {
+            background-color: #fff;
+            width: 300px;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .solution-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+        .solution-box img {
+            width: 60px;
+            margin-bottom: 15px;
+        }
+        .solution-box h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: #1e4d26;
+        }
+        .solution-box p {
+            font-size: 16px;
+            line-height: 1.5;
+            color: #333;
+        }
+        .benefits-section {
+            background-color: #f7fff7;
+            padding: 50px;
+            color: #1e4d26;
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+        .benefits-title {
+            font-size: 36px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #1e4d26;
+        }
+        .benefits-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .benefits-heading {
+            margin-bottom: 30px;
+        }
+        .benefits-heading h3 {
+            font-size: 28px;
+            line-height: 1.5;
+            margin: 0;
+        }
+        .benefits-heading .highlighted {
+            color: #99e55b;
+            font-weight: bold;
+        }
+        .benefits-list {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            max-width: 800px;
+            margin: 0 auto;
+            gap: 20px;
+        }
+        .benefit-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-align: left;
+            flex-basis: 45%;
+            font-size: 16px;
+        }
+        .benefit-item .icon {
+            background-color: #99e55b;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: inline-block;
+            position: relative;
+        }
+        .benefit-item .icon::before {
+            content: '✔';
+            color: #fff;
+            font-size: 14px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        .benefit-item p {
+            margin: 0;
+            font-size: 18px;
+            line-height: 1.5;
+        }
+
+        .dashboard-section {
+            padding: 40px 20px;
+            background-color: #fff;
+            color: #1e4d26;
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+
+        .dashboard-title {
+            font-size: 24px; /* Reduced size */
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #bc2546;
+        }
+
+        .dashboard-description {
+            font-size: 14px; /* Reduced size */
+            margin-bottom: 30px;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto 30px;
+        }
+
+        .dashboard-features {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            flex-wrap: wrap; /* Ensures responsiveness */
+            gap: 20px; /* Space between items */
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .dashboard-feature {
+            background-color: #f7fff7;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: left;
+            flex: 1 1 calc(33.333% - 20px); /* Ensure three items per row */
+            max-width: 300px; /* Control item width */
+            max-height: 150px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .dashboard-feature:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .dashboard-icon {
+            width: 40px; /* Reduced size */
+            margin-bottom: 10px;
+        }
+
+        .dashboard-feature h3 {
+            font-size: 16px; /* Reduced size */
+            color: #1e4d26;
+            margin-bottom: 10px;
+        }
+
+        .dashboard-feature p {
+            font-size: 14px; /* Reduced size */
+            line-height: 1.4;
+            color: #333;
+        }
+
+        .dashboard-section2 {
+            background: linear-gradient(135deg, #d4f880, #afd652); /* Smooth green gradient */
+            padding: 60px 30px;
+            color: #ffffff;
+            text-align: center;
+            border-radius: 15px; /* Softer rounded corners */
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25); /* Deeper shadow for premium feel */
+            margin: 40px auto;
+            max-width: 900px; /* Balanced width for desktop and mobile */
+        }
+
+        .dashboard-content {
+            max-width: 750px;
+            margin: 0 auto;
+        }
+
+        .dashboard-title {
+            font-size: 24px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+            color: #26b226; /* Softer white-green tone for title */
+        }
+
+        .dashboard-description {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #19c075; /* Softer tone for secondary emphasis */
+        }
+
+
+        .dashboard-details {
+            font-size: 18px;
+            line-height: 1.8; /* Increased line height for readability */
+            margin: 0 auto;
+            color: #156f47;
+            padding: 0 10px; /* Subtle padding for better mobile display */
+        }
+
+        .dashboard-section2 p {
+            margin-bottom: 25px; /* Add more space between paragraphs */
+        }
+
+        .dashboard-section2:hover {
+            transform: translateY(-5px); /* Subtle lift on hover for interaction */
+            box-shadow: 0 12px 30px rgba(23, 14, 14, 0.35); /* Enhance shadow on hover */
+            transition: all 0.4s ease-in-out; /* Smooth hover transition */
+        }
+
+        .dashboard-title2 {
+            font-size: 24px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+            color: #173617; 
+        }
+
+        .dashboard-description2 {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #1c3027; 
+        }
+
+        .collaboration-section {
+            background-color: #d4f880; /* Light green */
+            padding: 50px;
+            color: #1e4d26; /* Darker green for text */
+            font-family: Arial, sans-serif;
+            display: flex; /* Enable Flexbox layout */
+            flex-wrap: wrap; /* Allow wrapping for smaller screens */
+            gap: 20px; /* Space between items */
+            justify-content: center; /* Center align items horizontally */
+            align-items: center; /* Center align items vertically */
+        }
+
+        .content {
+            text-align: left;
+            max-width: 600px;
+            flex: 1; /* Allow content to grow or shrink */
+            margin: 0 20px; /* Add margin for spacing */
+        }
+
+        .content h3 {
+            font-size: 16px;
+            font-weight: bold;
+            color: #d4f880; /* Light green */
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .content h1 {
+            font-size: 48px;
+            line-height: 1.2;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .content p {
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        .content .mission {
+            font-size: 14px;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+
+        .form-container {
+            background-color: #ffffff; /* White form background */
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            max-width: 400px;
+            flex: 1; /* Allow form-container to grow or shrink */
+            margin: 0 20px; /* Add margin for spacing */
+        }
+
+        /* Adjust for smaller screens */
+        @media (max-width: 768px) {
+            .collaboration-section {
+                flex-direction: column; /* Stack items vertically on smaller screens */
+                text-align: center;
+            }
+
+            .content, .form-container {
+                margin: 20px 0; /* Add spacing between stacked items */
+            }
+        }
+
+        form input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        form button {
+            background-color: #d4f880; /* Light green button */
+            color: #000;
+            border: none;
+            padding: 15px;
+            width: 100%;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            text-transform: uppercase;
+        }
+
+        form button:hover {
+            background-color: #b6d967; /* Slightly darker green */
+        }
+
+        footer {
+            margin-top: 30px;
+            text-align: center;
+            font-size: 14px;
+            color: #ccc;
+        }
+
+        .resources {
+            margin: 20px 0;
+        }
+
+        .resources a {
+            color: #d4f880;
+            margin: 0 10px;
+            text-decoration: none;
+        }
+
+        .resources a:hover {
+            text-decoration: underline;
+        }
+
+        .social-icons img {
+            width: 20px;
+            margin: 0 5px;
+        }
+
+</style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo">
+            <h2>SYNC LAYER</h2>
+        </div>
+        <!-- <nav>
+            <a href="#">Menu 1</a>
+            <a href="#">Menu 2</a>
+            <a href="#">Menu 3</a>
+            <a href="#" class="contact-btn">Contact Us</a>
+        </nav> -->
+    </header>
+    <main class="main-content">
+        <div class="text-section">
+            <h1>Optimization to unlock full potential</h1>
+            <p>
+                Sync Layer’s AI-powered optimization enables edge computing capabilities for Depin networks.
+                <br>
+                We optimize Depin networks to enhance performance, security, and trust in decentralized data, 
+                so enterprises can confidently leverage its value.
+            </p>
+            <!-- <p>
+                <a href="#" class="get-started-btn">Get Started</a>
+            </p> -->
+           
+        </div>
+        <!-- <div class="image-section">
+            <img src="{{ url_for('static', filename='src/assets/icon-removebg-preview.png') }}" alt="Icon">
+        </div> -->
+        <div class="image-section">
+          <img src="/icon-removebg-preview.png" alt="Icon">
+      </div>
+    </main>
+    <section class="features-section">
+        <h2>What We Do</h2>
+        <div class="subtitle">
+            Unlock the Power of AI and Edge Computing with 
+            <span>DEPIN NETWORKS</span>
+        </div>
+        <div class="features-container">
+            <div class="feature-box">
+                <img src="icon2.png" alt="">
+                <!-- <img src="{{ url_for('static', filename='images/icon2.png') }}" alt="AI Powered Icon"> -->
+                <h3>Depin networks can customize our AI-powered optimization to unlock their full potential</h3>
+            </div>
+            <div class="feature-box">
+                <img src="icon3.png" alt="">
+                <!-- <img src="{{ url_for('static', filename='images/icon3.png') }}" alt="Hardware Icon"> -->
+                <h3>Enabling edge computing capabilities to hardware and physical devices</h3>
+            </div>
+        </div>
+    </section>
+    <section class="solutions-section">
+        <h2>Solutions</h2>
+        <div class="solutions-container">
+            <div class="solution-box">
+                <img src="icon4.png" alt="">
+                <!-- <img src="{{ url_for('static', filename='images/icon4.png') }}" alt="Scalability Icon"> -->
+                <h3>Scalability</h3>
+                <p>AI-powered optimization for efficient resource allocation</p>
+            </div>
+            <div class="solution-box">
+                <img src="icon5.png" alt="">
+                <!-- <img src="{{ url_for('static', filename='images/icon5.png') }}" alt="Latency Icon"> -->
+                <h3>Latency & Congestion</h3>
+                <p>Smart traffic management and routing</p>
+            </div>
+            <div class="solution-box">
+                <img src="icon6.png" alt="">
+                <!-- <img src="{{ url_for('static', filename='images/icon6.png') }}" alt="Security Icon"> -->
+                <h3>Security</h3>
+                <p>Enhanced encryption, access controls, and threat detection</p>
+            </div>
+            <div class="solution-box">
+                <img src="icon7.png" alt="">
+                <!-- <img src="{{ url_for('static', filename='images/icon7.png') }}" alt="Resource Icon"> -->
+                <h3>Resource Optimization</h3>
+                <p>Efficient use of resources, reducing energy consumption and costs</p>
+            </div>
+            <div class="solution-box">
+                <img src="icon8.png" alt="">
+                <!-- <img src="{{ url_for('static', filename='images/icon8.png') }}" alt="Device Optimization Icon"> -->
+                <h3>Device Optimization</h3>
+                <p>To enhance data collection, processing, and transmission</p>
+            </div>
+            <div class="solution-box">
+                <img src="icon9.png" alt="">
+                <!-- <img src="{{ url_for('static', filename='images/icon9.png') }}" alt="Interoperability Icon"> -->
+                <h3>Interoperability</h3>
+                <p>Seamless integration with other networks and systems</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="benefits-section">
+        <div class="benefits-title">Benefits</div>
+        <div class="benefits-content">
+            <div class="benefits-heading">
+                <h3>
+                    Sync Layer <span class="highlighted">delivers optimization</span> and analytics for Depin networks
+                </h3>
+            </div>
+            <div class="benefits-list">
+                <div class="benefit-item">
+                    <div class="icon"></div>
+                    <p>Increased operational efficiency.</p>
+                </div>
+                <div class="benefit-item">
+                    <div class="icon"></div>
+                    <p>Improved security protocols.</p>
+                </div>
+                <div class="benefit-item">
+                    <div class="icon"></div>
+                    <p>Data analytics for better insights.</p>
+                </div>
+                <div class="benefit-item">
+                    <div class="icon"></div>
+                    <p>Edge computing scalability.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+        
+    <section class="dashboard-section">
+        <h2 class="dashboard-title">Dashboard access for Depin networks</h2>
+        <p class="dashboard-description">
+            Dive into detailed metrics and KPIs to identify areas of improvement and optimize network & device performance.
+        </p>
+        <div class="dashboard-features">
+            <div class="dashboard-feature">
+                <img src="" alt="">
+                <img src="icon10.png" alt="In-Depth Analytics Icon" class="dashboard-icon">
+                <!-- <img src="{{ url_for('static', filename='images/icon10.png') }}" alt="In-Depth Analytics Icon" class="dashboard-icon"> -->
+                <h3>In-Depth Analytics</h3>
+                <p>Dive into detailed metrics and KPIs to identify areas of improvement and optimize network & device performance.</p>
+            </div>
+            <div class="dashboard-feature">
+                <img src="icon11.png" alt="Customizable Visualizations Icon" class="dashboard-icon">
+                <!-- <img src="{{ url_for('static', filename='images/icon11.png') }}" alt="Customizable Visualizations Icon" class="dashboard-icon"> -->
+                <h3>Customizable Visualizations</h3>
+                <p>Create personalized dashboards and reports to focus on the insights that matter most to your community.</p>
+            </div>
+            <div class="dashboard-feature">
+                <img src="icon12.png" alt="Real-Time Monitoring Icon" class="dashboard-icon">
+                <!-- <img src="{{ url_for('static', filename='images/icon12.png') }}" alt="Real-Time Monitoring Icon" class="dashboard-icon"> -->
+                <h3>Real-Time Monitoring</h3>
+                <p>Get instant alerts and notifications to ensure prompt action and minimize downtime.</p>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="dashboard-section2">
+        <div class="dashboard-content">
+            <h6 class="dashboard-title2">HOW WE DO</h6>
+            <p class="dashboard-description2">AI-Driven Scalable Optimization</p>
+            <p class="dashboard-details">
+                Our optimization solution is powered by Multimodal AI. It seamlessly combines Modular Architecture 
+                for scalable and custom integration with Depin networks, and leverages Reinforcement Learning 
+                Algorithms to continuously learn and enhance efficiency in real time.
+            </p>
+        </div>
+    </section>
+
+    <div class="collaboration-section">
+        <div class="content">
+            <h3>LETS CONNECT</h3>
+            <h1>Collaborate <br> with us</h1>
+            <p>We request all Depin networks, to join forces with us, ensuring alignment with your objectives and unlock the full potential of Depin</p>
+            <p class="mission">Mission: Sync layer ensures maximizing Depin networks potential</p>
+        </div>
+        <div class="form-container">
+            <form>
+                <input type="text" placeholder="DEPIN Network Name" required>
+                <input type="email" placeholder="Email ID" required>
+                <input type="text" placeholder="Telegram handle" required>
+                <button type="submit">Contact Us</button>
+            </form>
+        </div>
+        
+    </div>
+    <footer>
+      <p>Copyright © SyncLayer.ai 2024</p>
+  </footer>
+
+
+</body>
+</html>
+
+</body>
+</html>
